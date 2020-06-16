@@ -1,10 +1,11 @@
-package spring.chatapp.user.component;
+package chatapp.user.component;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import spring.chatapp.user.data.DynamoDbDAO;
-import spring.chatapp.user.data.User;
+import chatapp.user.data.DynamoDbDAO;
+import chatapp.user.data.User;
+import chatapp.utils.Result;
 
 @Component
 public class Authentication {

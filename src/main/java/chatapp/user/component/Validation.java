@@ -1,15 +1,16 @@
-package spring.chatapp.user.component;
+package chatapp.user.component;
 
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import chatapp.user.data.DynamoDbDAO;
+import chatapp.user.data.User;
+import chatapp.utils.Result;
 import lombok.Getter;
 
 import lombok.Setter;
-import spring.chatapp.user.data.DynamoDbDAO;
-import spring.chatapp.user.data.User;
 
 
 @Getter

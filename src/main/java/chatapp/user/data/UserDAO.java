@@ -1,4 +1,4 @@
-package spring.chatapp.user.data;
+package chatapp.user.data;
 
 public interface UserDAO {
 	

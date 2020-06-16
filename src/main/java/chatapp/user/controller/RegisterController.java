@@ -1,4 +1,4 @@
-package spring.chatapp.user.controller;
+package chatapp.user.controller;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -14,10 +14,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import spring.chatapp.user.component.Registration;
-import spring.chatapp.user.component.Result;
-import spring.chatapp.user.data.Gender;
-import spring.chatapp.user.data.User;
+import chatapp.enumerations.Gender;
+import chatapp.user.component.Registration;
+import chatapp.user.data.User;
+import chatapp.utils.Result;
 
 @Controller
 public class RegisterController {
@@ -28,13 +28,13 @@ public class RegisterController {
 	@RequestMapping(value = "/registerView", method = RequestMethod.GET)
 	public ModelAndView registerView() {
 		
-		return new ModelAndView("landing/registerView","command",new User())
+		return new ModelAndView("landing/registerView","user",new User())
 				.addObject("Genders", Gender.values());
 	}
 	
 	
 	@RequestMapping(value = "/register",method=RequestMethod.POST)
-	public ModelAndView register(@ModelAttribute("user")User user) {
+	public ModelAndView register(@ModelAttribute User user) {
 		
 		Result registerResult=registration.register(user);
 		if(registerResult.isSuccess()) {
@@ -45,7 +45,7 @@ public class RegisterController {
 		else {
 			
 			return new ModelAndView("landing/registerView","message",registerResult.getMessage())
-					.addObject("command", new User())
+					.addObject("user", new User())
 					.addObject("Genders", Gender.values());
 		}
 		

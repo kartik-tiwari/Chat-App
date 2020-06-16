@@ -1,4 +1,4 @@
-package spring.chatapp.user.controller;
+package chatapp.user.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -6,8 +6,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import spring.chatapp.user.component.Authentication;
-import spring.chatapp.user.data.User;
+import chatapp.user.component.Authentication;
+import chatapp.user.data.User;
 
 
 @Controller

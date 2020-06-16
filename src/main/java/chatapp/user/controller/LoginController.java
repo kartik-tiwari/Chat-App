@@ -1,4 +1,4 @@
-package spring.chatapp.user.controller;
+package chatapp.user.controller;
 
 
 import javax.servlet.http.HttpServletRequest;
@@ -10,8 +10,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import spring.chatapp.user.component.Authentication;
-import spring.chatapp.user.component.Result;
+import chatapp.user.component.Authentication;
+import chatapp.utils.Result;
+
 
 @Controller
 public class LoginController {
@@ -21,7 +22,6 @@ public class LoginController {
 	
 	@RequestMapping(value ="/loginView",method = RequestMethod.GET)
 	public String loginView() {
-		System.out.println("here");
 		return "landing/loginView";
 	}
 	

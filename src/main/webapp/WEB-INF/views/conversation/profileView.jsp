@@ -1,4 +1,4 @@
-<%@page import="spring.chatapp.user.data.User"%>
+<%@page import="chatapp.user.data.User"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%
@@ -31,7 +31,7 @@ User targetUser = (User) request.getAttribute("targetUser");
 		Gender :
 		<%=targetUser.getGender()%>
 	</h4>
-	<%if(currentUser.equals(targetUser)) {%>
+	<%if(currentUser.getUserName().equals((targetUser).getUserName())) {%>
 	<button>Edit Profile</button>
 	<%} else{ %>
 	<button>Chat</button>

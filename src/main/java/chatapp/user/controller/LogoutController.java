@@ -1,4 +1,4 @@
-package spring.chatapp.user.controller;
+package chatapp.user.controller;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;

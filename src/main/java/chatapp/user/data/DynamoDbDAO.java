@@ -1,4 +1,4 @@
-package spring.chatapp.user.data;
+package chatapp.user.data;
 import org.springframework.stereotype.Component;
 
 import com.amazonaws.auth.AWSStaticCredentialsProvider;
@@ -26,10 +26,10 @@ public class DynamoDbDAO implements UserDAO  {
 	
 	
 	
-	private String awsAccessKey="hidden";
-	private String awsSecretKey="hidden";
-	private String awsRegion="hidden";
-	private String awsDynamoDBEndPoint="hidden";
+	private String awsAccessKey="AKIAR2AOKZ3ORJI7KA53";
+	private String awsSecretKey="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";
+	private String awsRegion="us-east-2";
+	private String awsDynamoDBEndPoint="dynamodb.us-east-2.amazonaws.com";
 
 	public AmazonDynamoDB amazonDynamoDBConfig() {
 		return AmazonDynamoDBClientBuilder.standard()

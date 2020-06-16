@@ -11,7 +11,7 @@
 	<p>${message }</p>
 	<br>
 	User registration form
-	<form:form action="register" method="post">
+	<form:form action="register" method="post" modelAttribute="user">
 		<label>User Name : </label>
 		<form:input type="text" path="userName" />
 		<br>

@@ -1,9 +1,9 @@
-package spring.chatapp.user.component;
+package chatapp.utils;
 
+import chatapp.user.data.User;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
-import spring.chatapp.user.data.User;
 
 @Getter @Setter
 @AllArgsConstructor
