@@ -12,8 +12,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import chatapp.user.component.Authentication;
 import chatapp.utils.Result;
+import lombok.extern.log4j.Log4j;
 
-
+@Log4j
 @Controller
 public class LoginController {
 	
@@ -28,18 +29,25 @@ public class LoginController {
 	@RequestMapping(value = "/loginUser", method = RequestMethod.POST)
 	public ModelAndView loginUser(HttpServletRequest request,  String userName, String password) {
 		
-		Result loginResult = authentication.authenticate(userName, password);
-		
-		if(loginResult.isSuccess()) {
+		Result loginResult;
+		try {
+			loginResult = authentication.authenticate(userName, password);
+			if(loginResult.isSuccess()) {
+				
+				HttpSession session=request.getSession(true);
+				session.setAttribute("currentUser", loginResult.getUser());
+				return new ModelAndView("conversation/homeView");
 			
-			HttpSession session=request.getSession(true);
-			session.setAttribute("currentUser", loginResult.getUser());
-			return new ModelAndView("conversation/homeView");
+			}
+			else {
+				
+				return new ModelAndView("landing/loginView","message",loginResult.getMessage());
+			}
+		} catch (Exception e) {
+			log.error("Database connection error!");
+			return new ModelAndView("landing/loginView","message","atabase connection error");
+		}
 		
-		}
-		else {
-			
-			return new ModelAndView("landing/loginView","message",loginResult.getMessage());
-		}
+		
 	}
 }

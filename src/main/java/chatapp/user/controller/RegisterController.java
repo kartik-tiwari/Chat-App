@@ -18,7 +18,9 @@ import chatapp.enumerations.Gender;
 import chatapp.user.component.Registration;
 import chatapp.user.data.User;
 import chatapp.utils.Result;
+import lombok.extern.log4j.Log4j;
 
+@Log4j
 @Controller
 public class RegisterController {
 
@@ -36,20 +38,27 @@ public class RegisterController {
 	@RequestMapping(value = "/register",method=RequestMethod.POST)
 	public ModelAndView register(@ModelAttribute User user) {
 		
-		Result registerResult=registration.register(user);
-		if(registerResult.isSuccess()) {
-			
-			return new ModelAndView("landing/loginView","message",registerResult.getMessage());
-					
-		}
-		else {
-			
-			return new ModelAndView("landing/registerView","message",registerResult.getMessage())
+		Result registerResult;
+		try {
+			registerResult = registration.register(user);
+			if(registerResult.isSuccess()) {
+				
+				return new ModelAndView("landing/loginView","message",registerResult.getMessage());
+						
+			}
+			else {
+				
+				return new ModelAndView("landing/registerView","message",registerResult.getMessage())
+						.addObject("user", new User())
+						.addObject("Genders", Gender.values());
+			}
+		} catch (Exception e) {
+			log.info("Database connection error");
+			return new ModelAndView("landing/registerView","message","Database connection error")
 					.addObject("user", new User())
 					.addObject("Genders", Gender.values());
-		}
-		
-				
+			
+		}				
 	}   
     
 	

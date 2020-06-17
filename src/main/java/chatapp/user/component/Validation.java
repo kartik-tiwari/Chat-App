@@ -21,7 +21,7 @@ public class Validation {
 	
 	@Autowired
 	DynamoDbDAO dynamoDbDAO;
-	public Result validate(User user) {
+	public Result validate(User user) throws Exception {
 		// Validate User Name
 
 		// Length
@@ -38,9 +38,8 @@ public class Validation {
 		}
 		// Available
 		if(dynamoDbDAO.loadRecord(user.getUserName())!=null) {
-			return new Result(false, "User Name Taken",null);
-		}
-
+				return new Result(false, "User Name Taken",null);
+			}
 		// Validate First Name
 
 		// Length

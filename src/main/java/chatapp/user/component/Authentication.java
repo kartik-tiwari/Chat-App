@@ -13,13 +13,13 @@ public class Authentication {
 	@Autowired
 	DynamoDbDAO dynamoDbDAO;
 	
-	public User getUserbyUserName(String userName) {
+	public User getUserbyUserName(String userName) throws Exception {
 		
-		return dynamoDbDAO.loadRecord(userName);
+			return dynamoDbDAO.loadRecord(userName);
 	}
 	
 	
-	public Result authenticate(String userName, String password) {
+	public Result authenticate(String userName, String password) throws Exception {
 		
 		User user=getUserbyUserName(userName);
 		if(user==null) {
@@ -32,7 +32,6 @@ public class Authentication {
 			return new Result(true, "User Succesfully logged in", user);
 			
 		}
-		
 		else {
 			
 			return new Result(false, "Wrong Username or password", null);

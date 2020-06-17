@@ -11,11 +11,12 @@ import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
 public class DynamoDbDAO implements UserDAO  {
 	
 	
-	public void writeRecord(User user) {
-		mapper.save(user);
+	
+	public void writeRecord(User user) throws Exception {
+			mapper.save(user);
 	}
 	
-	public User loadRecord(String userName) {
+	public User loadRecord(String userName) throws Exception{
 		return mapper.load(User.class,userName);
 	}
 	
@@ -36,9 +37,6 @@ public class DynamoDbDAO implements UserDAO  {
 				.withEndpointConfiguration(new AwsClientBuilder.EndpointConfiguration(awsDynamoDBEndPoint, awsRegion))
 				.withCredentials(new AWSStaticCredentialsProvider(new BasicAWSCredentials(awsAccessKey, awsSecretKey)))
 				.build();
-	}
+	}	
 	DynamoDBMapper mapper = new DynamoDBMapper(amazonDynamoDBConfig());
-
-
-
 }

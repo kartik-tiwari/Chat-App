@@ -2,7 +2,7 @@ package chatapp.user.data;
 
 public interface UserDAO {
 	
-	void writeRecord(User user);
+	public void writeRecord(User user) throws Exception;
 	
-	User loadRecord(String userName);
+	public User loadRecord(String userName) throws Exception;
 }
