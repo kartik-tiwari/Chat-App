@@ -43,8 +43,9 @@ public class LoginController {
 				
 				return new ModelAndView("landing/loginView","message",loginResult.getMessage());
 			}
-		} catch (Exception e) {
-			log.error("Database connection error!");
+		} 
+		catch (Exception exception) {
+			log.error(exception.getMessage());
 			return new ModelAndView("landing/loginView","message","atabase connection error");
 		}
 		

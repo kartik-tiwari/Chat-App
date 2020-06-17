@@ -28,8 +28,9 @@ public class ProfileController {
 			else {
 				return new ModelAndView("conversation/profileView");
 			}
-		} catch (Exception e) {
-			log.error("Database connection error!");
+		} 
+		catch (Exception exception) {
+			log.error(exception.getMessage());
 			return new ModelAndView("conversation/profileView", "targetUser", null);
 		}
 		

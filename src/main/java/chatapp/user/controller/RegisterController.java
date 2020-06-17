@@ -52,8 +52,9 @@ public class RegisterController {
 						.addObject("user", new User())
 						.addObject("Genders", Gender.values());
 			}
-		} catch (Exception e) {
-			log.info("Database connection error");
+		} 
+		catch (Exception exception) {
+			log.error(exception.getMessage());
 			return new ModelAndView("landing/registerView","message","Database connection error")
 					.addObject("user", new User())
 					.addObject("Genders", Gender.values());

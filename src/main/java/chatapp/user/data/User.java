@@ -10,7 +10,7 @@ import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTypeConvertedEnum;
 import chatapp.enumerations.Gender;
 import lombok.Getter;
 import lombok.Setter;
-@DynamoDBTable(tableName = "useor")
+@DynamoDBTable(tableName = "user")
 @Getter @Setter
 public class User {
 	@DynamoDBHashKey(attributeName = "userName")
