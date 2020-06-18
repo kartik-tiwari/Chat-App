@@ -5,8 +5,9 @@ import java.util.Date;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import chatapp.user.data.DynamoDbDAO;
-import chatapp.user.data.User;
+import chatapp.dao.DbAccessor;
+
+import chatapp.user.model.User;
 import chatapp.utils.Result;
 import lombok.Getter;
 
@@ -20,7 +21,7 @@ import lombok.Setter;
 public class Validation {
 	
 	@Autowired
-	DynamoDbDAO dynamoDbDAO;
+	DbAccessor<User> dbAccessor;
 	public Result validate(User user) throws Exception {
 		// Validate User Name
 
@@ -37,7 +38,7 @@ public class Validation {
 			}
 		}
 		// Available
-		if(dynamoDbDAO.loadRecord(user.getUserName())!=null) {
+		if(dbAccessor.load(User.class, userName)!=null) {
 				return new Result(false, "User Name Taken",null);
 			}
 		// Validate First Name

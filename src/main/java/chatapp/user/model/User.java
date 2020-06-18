@@ -1,4 +1,4 @@
-package chatapp.user.data;
+package chatapp.user.model;
 
 import java.util.Date;
 

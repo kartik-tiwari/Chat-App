@@ -1,6 +1,6 @@
 package chatapp.utils;
 
-import chatapp.user.data.User;
+import chatapp.user.model.User;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;

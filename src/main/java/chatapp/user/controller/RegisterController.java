@@ -16,7 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import chatapp.enumerations.Gender;
 import chatapp.user.component.Registration;
-import chatapp.user.data.User;
+import chatapp.user.model.User;
 import chatapp.utils.Result;
 import lombok.extern.log4j.Log4j;
 

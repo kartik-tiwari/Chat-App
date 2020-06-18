@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import chatapp.user.component.Authentication;
-import chatapp.user.data.User;
+import chatapp.user.model.User;
 import lombok.extern.log4j.Log4j;
 
 @Log4j
@@ -21,17 +21,17 @@ public class ProfileController {
 		
 		User user;
 		try {
-			user = authenticate.getUserbyUserName(userName);
+			user = authenticate.getUserByUserName(userName);
 			if(user!=null) {
 				return new ModelAndView("conversation/profileView", "targetUser", user);
 			}
 			else {
-				return new ModelAndView("conversation/profileView");
+				return new ModelAndView("conversation/homeView");
 			}
 		} 
 		catch (Exception exception) {
 			log.error(exception.getMessage());
-			return new ModelAndView("conversation/profileView", "targetUser", null);
+			return new ModelAndView("conversation/homeView");
 		}
 		
 		

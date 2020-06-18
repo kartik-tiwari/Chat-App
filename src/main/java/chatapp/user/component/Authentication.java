@@ -3,25 +3,25 @@ package chatapp.user.component;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import chatapp.user.data.DynamoDbDAO;
-import chatapp.user.data.User;
+import chatapp.dao.DbAccessor;
+
+import chatapp.user.model.User;
 import chatapp.utils.Result;
 
 @Component
 public class Authentication {
 	
 	@Autowired
-	DynamoDbDAO dynamoDbDAO;
+	DbAccessor<User> dbAccesor;
 	
-	public User getUserbyUserName(String userName) throws Exception {
+	public User getUserByUserName(String userName) throws Exception {
 		
-			return dynamoDbDAO.loadRecord(userName);
+			return dbAccesor.load(User.class, userName);
 	}
-	
 	
 	public Result authenticate(String userName, String password) throws Exception {
 		
-		User user=getUserbyUserName(userName);
+		User user=getUserByUserName(userName);
 		if(user==null) {
 			
 			return new Result(false, "No User Found",null);
