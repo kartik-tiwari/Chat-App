@@ -14,6 +14,9 @@ public class LogoutController {
 	// Class constants
 	private final String URL_LOGOUT_USR = "/logout";
 
+	/*
+	 * Logs out user
+	 */
 	@RequestMapping(value = URL_LOGOUT_USR)
 	public ModelAndView logout(HttpSession session) {
 		session.invalidate();

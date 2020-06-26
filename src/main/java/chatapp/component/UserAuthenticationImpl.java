@@ -1,5 +1,6 @@
 package chatapp.component;
 
+import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import chatapp.exceptions.DependencyFailureException;
@@ -28,10 +29,10 @@ public class UserAuthenticationImpl implements UserAuthentication {
 	 * 
 	 * @throws InvalidInputException NonRetryableException, Retryable Exception
 	 */
-	public User authenticate(String userName, String password) throws Exception {
+	public User authenticate(final String userName, final String password) throws Exception {
 		try {
 			User user = userManagement.getUserByUserName(userName);
-			if (password.equals(user.getPassword())) {
+			if (DigestUtils.md5Hex(password).equals(user.getPassword())) {
 				return user;
 			} else {
 				throw new InvalidInputException(Constants.ErrorsMessage.INVALID_USERNAME_PASSWORD);

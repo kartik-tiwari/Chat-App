@@ -5,7 +5,6 @@ import java.util.Date;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-
 import chatapp.dao.DBAccessor;
 import chatapp.enumerations.UserType;
 import chatapp.exceptions.InvalidInputException;
@@ -17,12 +16,23 @@ public class UserValidationImpl implements UserValidation {
 	@Autowired
 	private DBAccessor<User> dbAccessor;
 
-	public void validate(User user,UserType userType) throws Exception {
-		
-		if(userType==UserType.UNREGISTERED) {
+	/*
+	 * Validates user based on usertype
+	 * 
+	 * @param User user
+	 * 
+	 * @param usertType UserType
+	 * 
+	 * @throws DynamoDb exception
+	 * 
+	 * @throws InvalidInputException
+	 */
+	public void validate(User user, UserType userType) throws Exception {
+
+		if (userType == UserType.UNREGISTERED) {
 			checkAvailableUserName(user.getUserName());
 		}
-		
+
 		validateUserName(user.getUserName());
 
 		validateFirstName(user.getFirstName());
@@ -52,11 +62,11 @@ public class UserValidationImpl implements UserValidation {
 	}
 
 	public void checkAvailableUserName(String userName) throws Exception {
-		
-			User existingUser=dbAccessor.load(User.class, userName);
-			if(existingUser!=null) {
-				throw new InvalidInputException(Constants.ErrorsMessage.USERNAME_NOT_AVAILABLE);
-			}
+
+		User existingUser = dbAccessor.load(User.class, userName);
+		if (existingUser != null) {
+			throw new InvalidInputException(Constants.ErrorsMessage.USERNAME_NOT_AVAILABLE);
+		}
 
 	}
 

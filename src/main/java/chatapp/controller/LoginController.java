@@ -23,44 +23,59 @@ public class LoginController {
 
 	@Autowired
 	UserAuthenticationImpl authentication;
-	
-	//Class constants 
+
+	// Class constants
 	private final String URL_LOGIN_VIEW = "/loginView";
 	private final String URL_LOGIN_USER = "/loginUser";
+	private final String URL_LANDING_HOME = "/home";
 
+	/*
+	 * Opens Welcome view
+	 */
+	@RequestMapping(URL_LANDING_HOME)
+	public String homepage() {
+		return Constants.Directory.LANDING + Constants.VIEWS.USER_WELCOME;
+	}
+
+	/*
+	 * Opens login user view with given message displayed
+	 * 
+	 * @param message String
+	 * 
+	 * @param session HttpSession
+	 */
 	@RequestMapping(value = URL_LOGIN_VIEW, method = RequestMethod.GET)
-	public String loginView() {
-		return Constants.Directory.LANDING+Constants.VIEWS.USER_LOGIN;
+	public ModelAndView loginView(String message) {
+		return new ModelAndView(Constants.Directory.LANDING + Constants.VIEWS.USER_LOGIN,
+				Constants.Attribute.MESSAGE, message);
 	}
 
 	@RequestMapping(value = URL_LOGIN_USER, method = RequestMethod.POST)
-	public ModelAndView loginUser(HttpServletRequest request, String userName, String password) {
+	public ModelAndView loginUser(HttpServletRequest request, final String userName, final String password) {
 
 		try {
 			User user = authentication.authenticate(userName, password);
 			HttpSession session = request.getSession(true);
 			session.setAttribute(Constants.Attribute.CURRENT_USER, user);
-			return new ModelAndView(Constants.Directory.CONVERSATION+Constants.VIEWS.USER_HOME);
+			return new ModelAndView(Constants.Directory.CONVERSATION + Constants.VIEWS.USER_HOME);
 
 		} catch (NonRetryableException exception) {
 			exception.printStackTrace();
 			log.error(exception.getMessage());
-			return new ModelAndView(Constants.Directory.LANDING+Constants.VIEWS.USER_LOGIN, Constants.Attribute.MESSAGE,
-					Constants.ErrorsMessage.NON_RETRYABLE_EXCEPTION_MESSAGE);
+			return loginView(Constants.ErrorsMessage.NON_RETRYABLE_EXCEPTION_MESSAGE);
 		} catch (RetryableException exception) {
 			exception.printStackTrace();
 			log.error(exception.getMessage());
-			return new ModelAndView(Constants.Directory.LANDING+Constants.VIEWS.USER_LOGIN, Constants.Attribute.MESSAGE,
-					Constants.ErrorsMessage.RETRYABLE_EXCEPTION_MESSAGE);
+			return loginView(Constants.ErrorsMessage.RETRYABLE_EXCEPTION_MESSAGE);
 
 		} catch (InvalidInputException exception) {
 			exception.printStackTrace();
 			log.error(exception.getMessage());
-			return new ModelAndView(Constants.Directory.LANDING+Constants.VIEWS.USER_LOGIN, Constants.Attribute.MESSAGE, exception.getMessage());
+			return loginView(exception.getMessage());
 		} catch (Exception exception) {
 			exception.printStackTrace();
 			log.error(exception.getMessage());
-			return new ModelAndView(Constants.Directory.LANDING+Constants.VIEWS.USER_LOGIN, Constants.Attribute.MESSAGE, exception.getMessage());
+			return loginView(exception.getMessage());
 		}
 
 	}

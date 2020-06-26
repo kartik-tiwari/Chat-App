@@ -35,11 +35,18 @@ public class EditUserController {
 	private final String URL_EDIT_VIEW = "/editView";
 	private final String URL_EDIT_USER = "/editUser";
 
+	/*
+	 * Opens Edit user view with given message displayed
+	 * 
+	 * @param message String
+	 * 
+	 * @param session HttpSession
+	 */
 	@RequestMapping(value = URL_EDIT_VIEW)
 	public ModelAndView editView(String message, HttpSession session) {
-		return new ModelAndView(Constants.Directory.CONVERSATION+Constants.VIEWS.USER_EDIT, Constants.Attribute.USER, session.getAttribute(Constants.Attribute.CURRENT_USER))
-				.addObject(Constants.Attribute.MESSAGE, message)
-				.addObject(Constants.Attribute.GENDERS, Gender.values());
+		return new ModelAndView(Constants.Directory.CONVERSATION + Constants.VIEWS.USER_EDIT, Constants.Attribute.USER,
+				session.getAttribute(Constants.Attribute.CURRENT_USER)).addObject(Constants.Attribute.MESSAGE, message)
+						.addObject(Constants.Attribute.GENDERS, Gender.values());
 	}
 
 	@RequestMapping(value = URL_EDIT_USER, method = RequestMethod.POST)
@@ -47,8 +54,8 @@ public class EditUserController {
 		try {
 			registration.register(user, UserType.REGISTERED);
 			session.setAttribute(Constants.Attribute.CURRENT_USER, user);
-			return new ModelAndView(Constants.Directory.CONVERSATION+Constants.VIEWS.USER_HOME, Constants.Attribute.MESSAGE,
-					Constants.SuccessMessage.SUCCESFUL_UPDATION);
+			return new ModelAndView(Constants.Directory.CONVERSATION + Constants.VIEWS.USER_HOME,
+					Constants.Attribute.MESSAGE, Constants.SuccessMessage.SUCCESFUL_UPDATION);
 		} catch (RetryableException exception) {
 			log.error(exception.getMessage());
 			return editView(Constants.ErrorsMessage.RETRYABLE_EXCEPTION_MESSAGE, session);

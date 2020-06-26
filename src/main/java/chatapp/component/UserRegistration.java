@@ -10,6 +10,8 @@ public interface UserRegistration {
 	 * 
 	 * @param User user
 	 * 
+	 * @param UserType userType
+	 * 
 	 * @throws InavalidInputException, NonRetryableException, RetryableException
 	 */
 	public void register(User user, UserType userType) throws Exception;

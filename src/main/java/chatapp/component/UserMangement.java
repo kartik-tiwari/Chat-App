@@ -28,7 +28,7 @@ public class UserMangement {
 	 * 
 	 * @throws InvalidInputException, InternalException, DependencyFalureException
 	 */
-	public User getUserByUserName(String userName) throws Exception {
+	public User getUserByUserName(final String userName) throws Exception {
 		try {
 			User user = dbAccessor.load(User.class, userName);
 			if (user != null) {
@@ -41,6 +41,5 @@ public class UserMangement {
 		} catch (SdkClientException exception) {
 			throw new DependencyFailureException(exception.getMessage());
 		}
-
 	}
 }

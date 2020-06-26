@@ -19,29 +19,39 @@ public class ProfileController {
 	@Autowired
 	UserMangement userManagement;
 
+	/*
+	 * Opens Profile View of given userName
+	 * 
+	 * @param userName String
+	 */
 	@RequestMapping("/profile/{userName}")
-	public ModelAndView profile(@PathVariable String userName) {
+	public ModelAndView profile(@PathVariable final String userName) {
 
 		try {
 			User user = userManagement.getUserByUserName(userName);
-			return new ModelAndView(Constants.Directory.CONVERSATION+Constants.VIEWS.USER_PROFILE, Constants.Attribute.TARGET_USER, user);
+			return new ModelAndView(Constants.Directory.CONVERSATION + Constants.VIEWS.USER_PROFILE,
+					Constants.Attribute.TARGET_USER, user);
 		} catch (InternalException exception) {
 			log.error(exception.getMessage());
-			return new ModelAndView(Constants.Directory.CONVERSATION+Constants.VIEWS.USER_HOME).addObject(Constants.Attribute.MESSAGE,
-					Constants.ErrorsMessage.NON_RETRYABLE_EXCEPTION_MESSAGE);
+			return new ModelAndView(Constants.Directory.CONVERSATION + Constants.VIEWS.USER_HOME)
+					.addObject(Constants.Attribute.MESSAGE, Constants.ErrorsMessage.NON_RETRYABLE_EXCEPTION_MESSAGE);
 
 		} catch (DependencyFailureException exception) {
 			log.error(exception.getMessage());
-			return new ModelAndView(Constants.Directory.CONVERSATION+Constants.VIEWS.USER_HOME).addObject(Constants.Attribute.MESSAGE,
-					Constants.ErrorsMessage.RETRYABLE_EXCEPTION_MESSAGE);
+			return new ModelAndView(Constants.Directory.CONVERSATION + Constants.VIEWS.USER_HOME)
+					.addObject(Constants.Attribute.MESSAGE, Constants.ErrorsMessage.RETRYABLE_EXCEPTION_MESSAGE);
 		} catch (InvalidInputException exception) {
 			log.error(exception.getMessage());
-			return new ModelAndView(Constants.Directory.CONVERSATION+Constants.VIEWS.USER_HOME).addObject(Constants.Attribute.MESSAGE,
-					exception.getMessage());
+			return new ModelAndView(Constants.Directory.CONVERSATION + Constants.VIEWS.USER_HOME)
+					.addObject(Constants.Attribute.MESSAGE, exception.getMessage());
 		} catch (Exception exception) {
 			log.error(exception.getMessage());
-			return new ModelAndView(Constants.Directory.CONVERSATION+Constants.VIEWS.USER_HOME);
+			return new ModelAndView(Constants.Directory.CONVERSATION + Constants.VIEWS.USER_HOME);
 		}
+	}
 
+	@RequestMapping(value = "userHome")
+	public ModelAndView userHome() {
+		return new ModelAndView(Constants.Directory.CONVERSATION + Constants.VIEWS.USER_HOME);
 	}
 }

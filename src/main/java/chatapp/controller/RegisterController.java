@@ -37,11 +37,17 @@ public class RegisterController {
 	private final String URL_REGISTER_VIEW = "/registerView";
 	private final String URL_REGISTER_USER = "/register";
 
+	/*
+	 * Opens Register new user view with given message displayed
+	 * 
+	 * @param message String
+	 * 
+	 */
 	@RequestMapping(value = URL_REGISTER_VIEW, method = RequestMethod.GET)
 	public ModelAndView registerView(String message) {
-		return new ModelAndView(Constants.Directory.LANDING+Constants.VIEWS.USER_REGISTER, Constants.Attribute.USER, new User())
-				.addObject(Constants.Attribute.MESSAGE, message)
-				.addObject(Constants.Attribute.GENDERS, Gender.values());
+		return new ModelAndView(Constants.Directory.LANDING + Constants.VIEWS.USER_REGISTER, Constants.Attribute.USER,
+				new User()).addObject(Constants.Attribute.MESSAGE, message).addObject(Constants.Attribute.GENDERS,
+						Gender.values());
 	}
 
 	@RequestMapping(value = URL_REGISTER_USER, method = RequestMethod.POST)
@@ -49,8 +55,8 @@ public class RegisterController {
 
 		try {
 			registration.register(user, UserType.UNREGISTERED);
-			return new ModelAndView(Constants.Directory.LANDING+Constants.VIEWS.USER_LOGIN, Constants.Attribute.MESSAGE,
-					Constants.SuccessMessage.SUCCESFUL_REGISTRATION);
+			return new ModelAndView(Constants.Directory.LANDING + Constants.VIEWS.USER_LOGIN,
+					Constants.Attribute.MESSAGE, Constants.SuccessMessage.SUCCESFUL_REGISTRATION);
 		} catch (RetryableException exception) {
 			log.error(exception.getMessage());
 			return registerView(Constants.ErrorsMessage.RETRYABLE_EXCEPTION_MESSAGE);
@@ -65,7 +71,7 @@ public class RegisterController {
 
 		} catch (Exception exception) {
 			log.error(exception.getMessage());
-			return registerView(exception.getMessage());
+			return registerView(Constants.ErrorsMessage.RETRYABLE_EXCEPTION_MESSAGE);
 		}
 	}
 
