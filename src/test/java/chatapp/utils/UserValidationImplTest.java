@@ -28,20 +28,27 @@ class UserValidationImplTest {
 	
 	@Test
 	void testUserValidation() throws Exception{
+
 		String userName = "testUserName";
 		String firstName = "firstName1";
 		String lastName = "lastName";
 		Date dateOfBirth = new Date(1999, 8, 21);
 		Gender gender = Gender.Male;
 		String password = "password";
+
 		User user = new User();
+
 		user.setUserName(userName);
 		user.setFirstName(firstName);
 		user.setLastName(lastName);
 		user.setGender(gender);
 		user.setDateOfBirth(dateOfBirth);
 		user.setPassword(password);
+		
+		//Mocking dependency
 		Mockito.when(dbAccessor.load(User.class, userName)).thenReturn(null);
+
+
 		assertThrows(InvalidInputException.class, ()->userValidation.validate(user, UserType.UNREGISTERED),"First Name Contains a numeric");
 
 	}
