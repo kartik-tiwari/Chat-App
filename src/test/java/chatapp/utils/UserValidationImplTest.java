@@ -27,7 +27,7 @@ class UserValidationImplTest {
 	private UserValidationImpl userValidation = new UserValidationImpl();
 	
 	@Test
-	void test() throws Exception{
+	void testUserValidation() throws Exception{
 		String userName = "testUserName";
 		String firstName = "firstName1";
 		String lastName = "lastName";
