@@ -1,13 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+	pageEncoding="ISO-8859-1" isELIgnored="false"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="ISO-8859-1">
+<link rel="stylesheet" type="text/css" href='<c:url value="/resources/css/style.css"/>' />
 <title>Chat App Welcome</title>
 </head>
 <body>
-<h3>Welcome to Chat Apppp</h3>
-<br>
+	<h3 class ="head1">Welcome to Chat App</h3>
+	<p>${message }</p>
+	<br>
+	<p class="head1"> <a href="loginView"> Go to login</a> </p>
+	<br>
+	<p class="head1"> <a href="registerView">Go to register</a></p>
+</body>
 </body>
 </html>

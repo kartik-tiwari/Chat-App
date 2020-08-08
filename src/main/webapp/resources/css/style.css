@@ -1,0 +1,31 @@
+.head1 {
+	color: #400040;
+	font-family: 'Ubuntu', sans-serif;
+	font-size: 28px;
+	margin-left: 25%;
+}
+
+.input {
+	width: 30%;
+	color: rgb(38, 50, 56);
+	font-weight: 700;
+	font-size: 24px;
+	font-weight: 700;
+	text-align: center;
+	font-family: 'Ubuntu', sans-serif;
+	padding-right: 40px;
+	padding-bottom: 10px;
+	padding-top: 10px;
+	margin-left: 25%;
+}
+
+.submit {
+	color: #400040;
+	padding-left: 40px;
+	padding-right: 40px;
+	padding-bottom: 10px;
+	padding-top: 10px;
+	font-family: 'Ubuntu', sans-serif;
+	margin-left: 35%;
+	font-size: 13px;
+}
