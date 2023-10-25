@@ -1,0 +1,43 @@
+package chatApp.component;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+
+import static junit.framework.TestCase.assertNotNull;
+import static org.junit.Assert.assertThrows;
+import chatapp.exceptions.InvalidInputException;
+import chatapp.model.User;
+public class UserAuthenticationImplTest {
+
+    @InjectMocks
+    private UserAuthenticationImpl userAuthenticationImpl;
+
+    @Mock
+    private UserMangement userManagement;
+
+    @BeforeEach
+    public void setUp() {
+        MockitoAnnotations.openMocks(this);
+    }
+
+    @Test
+    public void testAuthenticate_PasswordCorrect () {
+        User user = TestUtils.getUser();
+        user.setPassword("correct-password");
+        when(userManagement.getUser(isA(String.class), isA(String.class))).thenReturn(user);
+        User result  = userAuthenticationImpl.authenticate("test-user", "correct-password");
+        assertNotNull(user);
+    }
+
+    @Test
+    public void testAuthenticate_PasswordIncoorect () {
+        User user = TestUtils.getUser();
+        user.setPassword("correct-password");
+        when(userManagement.getUser(isA(String.class), isA(String.class))).thenReturn(user);
+        assertThrows(InvalidInputException.class, ()->userAuthenticationImpl.authenticate("test-user", "incorrect-password"));
+
+    }
+}
