@@ -34,4 +34,7 @@ public class DBAccessor<T> {
 	}
 
 
+    public void delete(T user) {
+		mapper.delete(user);
+    }
 }
