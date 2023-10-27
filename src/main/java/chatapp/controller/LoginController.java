@@ -54,9 +54,9 @@ public class LoginController {
 	public ModelAndView loginUser(HttpServletRequest request, final String userName, final String password) {
 
 		try {
-			User user = authentication.authenticate(userName, password);
+			User currentUser = authentication.authenticate(userName, password);
 			HttpSession session = request.getSession(true);
-			session.setAttribute(Constants.Attribute.CURRENT_USER, user);
+			session.setAttribute(Constants.Attribute.CURRENT_USER, currentUser);
 			return new ModelAndView(Constants.Directory.CONVERSATION + Constants.VIEWS.USER_HOME);
 
 		} catch (NonRetryableException exception) {

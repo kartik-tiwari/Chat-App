@@ -19,7 +19,7 @@ import lombok.extern.log4j.Log4j;
 
 @Log4j
 @Controller
-public class LoginController {
+public class DeleteUser {
 
 	@Autowired
 	UserAuthenticationImpl authentication;
