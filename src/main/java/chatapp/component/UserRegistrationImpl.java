@@ -1,17 +1,17 @@
 package chatapp.component;
 
+import chatapp.exceptions.*;
+import chatapp.utils.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import chatapp.dao.DBAccessor;
 import chatapp.enumerations.UserType;
-import chatapp.exceptions.DependencyFailureException;
-import chatapp.exceptions.InternalException;
-import chatapp.exceptions.NonRetryableException;
-import chatapp.exceptions.RetryableException;
 import chatapp.model.User;
 import chatapp.utils.UserValidation;
 import org.apache.commons.codec.digest.DigestUtils;
+
+import java.util.Objects;
 
 @Component
 public class UserRegistrationImpl implements UserRegistration {
@@ -48,5 +48,19 @@ public class UserRegistrationImpl implements UserRegistration {
 			throw new RetryableException(exception.getMessage());
 		}
 
+	}
+
+
+	public void delete(String userName)  {
+		User user = null;
+		try {
+			user = dbAccessor.load(User.class, userName);
+			if (Objects.isNull(user)) {
+				throw new InvalidInputException(Constants.ErrorsMessage.USERNAME_NOT_FOUND);
+			}
+			dbAccessor.delete(user);
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
 	}
 }
